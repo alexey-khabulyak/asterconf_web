@@ -101,3 +101,18 @@ class IVREntry(models.Model):
     action  = models.CharField(verbose_name="Действие", max_length=100, default="menu-exec-app", choices=ACTIONS)
     digit  = models.CharField(verbose_name="Цифры", max_length=100,)
     param  = models.CharField(verbose_name="Параметры", max_length=100, null=True, blank=True)
+
+
+class Call(models.Model):
+
+    class Meta:
+        verbose_name = "Звонок"
+        verbose_name_plural = "Звонки"
+
+    uuid = models.CharField(verbose_name="UUID звонка", max_length=100, unique=True)
+    src  = models.CharField(verbose_name="А-номер", max_length=100)
+    dst  = models.CharField(verbose_name="Б-номер", max_length=100)
+    direction  = models.CharField(verbose_name="Направление", max_length=100)
+    time  = models.DateTimeField(verbose_name="Время звонка", max_length=100, auto_now_add=True)
+    status = models.CharField(verbose_name="Статус", max_length=100, default="NOANSWER")
+    duration = models.IntegerField(verbose_name="Длительность", default=0)

@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import User, UserVar, Group, Context, ContextAction, IVR, IVREntry
+from .models import (User, UserVar, Group, Context,
+                    ContextAction, IVR, IVREntry,
+                    Call)
 
 
 class UserVarInline(admin.TabularInline):
@@ -22,6 +24,12 @@ class IVREntryInline(admin.TabularInline):
     show_change_link = True
     extra = 0
 
+
+@admin.register(Call)
+class CallAdmin(admin.ModelAdmin):
+    fields = ('uuid', 'src', 'dst', 'direction', 'time', 'status', 'duration')
+    list_display = ('uuid', 'src', 'dst', 'direction', 'time', 'status', 'duration')
+    readonly_fields = ('uuid', 'src', 'dst', 'direction', 'time', 'status', 'duration')
 
 @admin.register(IVR)
 class IVRAdmin(admin.ModelAdmin):
