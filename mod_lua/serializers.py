@@ -8,9 +8,7 @@ class CallSerializer(serializers.ModelSerializer):
         fields = ('uuid', 'src', 'dst', 'direction', 'time', 'status', 'duration')
 
     def update(self, instance, validated_data):
-        print(instance)
-        print(validated_data)
-        instance.duration = validated_data.get('duration')
-        instance.status = validated_data.get('status')
+        instance.duration = validated_data.get('duration', instance.duration)
+        instance.status = validated_data.get('status', instance.status)
         instance.save()
         return instance
